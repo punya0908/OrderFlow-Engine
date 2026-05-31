@@ -292,6 +292,8 @@ public class TradingService {
         for (Partition p : partitions) {
             p.shutdown();
         }
-        persistenceService.shutdown();
+        if (persistenceService != null) {
+            persistenceService.shutdown();
+        }
     }
 }

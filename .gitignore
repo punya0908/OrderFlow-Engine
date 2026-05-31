@@ -14,3 +14,15 @@
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Benchmarks and Stress Tests (Testing Code)
+trading-benchmarks/
+
+# Maven Wrappers and Build Tool Files
+**/.mvn/
+**/mvnw
+**/mvnw.cmd
+
+# Package Locks and Frontend Dependencies
+**/package-lock.json
+**/node_modules/

@@ -1,7 +1,7 @@
 # ⚡ Ultra-Low Latency In-Memory Matching Engine
 
 [![Java Version](https://img.shields.io/badge/Java-25-orange.svg?style=for-the-badge&logo=openjdk)](https://openjdk.org/projects/jdk/25/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen.svg?style=for-the-badge&logo=springboot)](https://spring.io/projects/spring-boot)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.14-brightgreen.svg?style=for-the-badge&logo=springboot)](https://spring.io/projects/spring-boot)
 [![LMAX Disruptor](https://img.shields.io/badge/Disruptor-3.4.4-blue.svg?style=for-the-badge)](https://github.com/LMAX-Exchange/disruptor)
 [![JMH](https://img.shields.io/badge/Microbenchmarks-JMH%201.37-red.svg?style=for-the-badge)](https://openjdk.org/obiref/jmh/)
 [![Build Tool](https://img.shields.io/badge/Build-Maven-blue?style=for-the-badge&logo=apachemaven)](https://maven.apache.org/)
@@ -153,20 +153,20 @@ nifty-brahmagupta/
 ## 🛠️ Step-by-Step Build & Run Guide
 
 ### Prerequisites
-* **Java 21** or higher installed
-* **Maven 3.8+** installed
+* **Java 25** or higher installed
+* Maven is optional because each Maven module now includes the Maven Wrapper
 
 ### 1. Build and Install Core Module
 Before running the benchmarks, compile and install the core matching engine module into your local maven cache:
 ```bash
 cd trading-simulator
-mvn clean install -DskipTests=true
+./mvnw clean install -DskipTests=true
 ```
 
 ### 2. Start the REST & WebSocket Application
 To start the Spring Boot web app:
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 The server will start on port `8080` (HTTP and WebSockets).
 
@@ -174,25 +174,25 @@ The server will start on port `8080` (HTTP and WebSockets).
 Navigate to the benchmarks directory and compile the package:
 ```bash
 cd ../trading-benchmarks
-mvn clean package
+./mvnw clean package
 ```
 
 ### 4. Run Sequential Stress Test (10 Million Orders)
 Executes 10 million order submissions directly into the matching engine in memory, reporting raw throughput and latency percentiles:
 ```bash
-mvn exec:java -Dexec.mainClass="DirectStressTest"
+./mvnw exec:java -Dexec.mainClass="DirectStressTest"
 ```
 
 ### 5. Run Concurrent Stress Test (Multi-Threaded Queue)
 Simulates concurrent clients submitting orders to the lock-free Disruptor partitions:
 ```bash
-mvn exec:java -Dexec.mainClass="MultiThreadedStressTest"
+./mvnw exec:java -Dexec.mainClass="MultiThreadedStressTest"
 ```
 
 ### 6. Run JMH Microbenchmarks
 Executes formal OpenJDK JMH microbenchmarks for nano-second level profiling:
 ```bash
-mvn exec:java -Dexec.mainClass="benchmark.MatchingEngineBenchmark"
+./mvnw exec:java -Dexec.mainClass="benchmark.MatchingEngineBenchmark"
 ```
 
 ---
