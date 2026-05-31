@@ -18,7 +18,7 @@
     <description>Low-Latency In-Memory Stock Exchange Matching Engine</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>21</java.version>
     </properties>
 
     <dependencies>
