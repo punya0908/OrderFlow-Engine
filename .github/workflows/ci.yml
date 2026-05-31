@@ -8,7 +8,6 @@ on:
   pull_request:
     paths:
       - "trading-simulator/**"
-      - "trading-benchmarks/**"
       - ".github/workflows/ci.yml"
 
 jobs:
@@ -19,21 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Java 25
+      - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "25"
+          java-version: "21"
           cache: maven
 
       - name: Build trading-simulator
         working-directory: trading-simulator
-        run: .\mvnw.cmd -B test
+        run: mvn -B test
 
-      - name: Install trading-simulator for benchmark resolution
+      - name: Install trading-simulator
         working-directory: trading-simulator
-        run: .\mvnw.cmd -B -DskipTests install
-
-      - name: Build trading-benchmarks
-        working-directory: trading-benchmarks
-        run: .\mvnw.cmd -B test
+        run: mvn -B -DskipTests install
